@@ -1,34 +1,18 @@
-# mccptester
+# Shopee seller authorisation
 
-This web app is developed for the monitoring of the Multi-Channel-Commerce-Platform (MCCP) developed. 
-Inventory is tracked against IMS/WMS
-Shipment status is tracked against TMS
+## Steps
+1) Go to https://mccptester.herokuapp.com/shopee and click submit
+2) You will be redirected to the shopee seler login page
+3) After login you will be redirected back to mccptester website with the relevant credentials (if successful)
 
-Besides the above, it also caters for Shopee new open platform authorisation. This is an interim solution while SmartOSC works on the final version
+## Code
+Refer to mccpAPI.py and shopee.py
 
-Below is a short summary of the items monitored.
+### mccpAPI.py
+class ShopeeURL: This is the API call that returns the encoded shopee URL to be redirected to. Go to shopee.py to see the generation of the URL
+class ShopeeRedirect: This is the handler for the api callback from shopee. It will return the shopID if successful and an error msg if unsuccessful
 
-url: mccptester.herokuapp.com
+### Shopee.py
+Shows the generation of the url for the first redirect (from mccptester to shopee for seller login).
 
-## Development
-Server side code developed on python.
-API end points hosted using Flask
-HTML, CSS and Javascript hosted using Flask
-
-Due to the large data volume, implemented a worker on redis for background processing. Frontend calls server in intervals to query on job status.
-
-## Product info
-### 1. Account
-Link your MCCP account with you IMS and TMS account
-
-### 2. Inventory
-Extracts a list of all products from MCCP and its inventory from MCCP and IMS. Discrepancies are highlighted and there is the option to conduct the sync.
-
-### 3. Orders
-Not developed yet
-
-### 4. Shipments
-Not developed yet
-
-### 5. Shopee
-Use this is extract shop_id. This authorises our app to access the Shopee account. You will be redirected to shopee for login after clicking submit. Upon successful login, you will be redirected back to the page and the shop_id will be displayed
+The credentials such as key etc. is extracted from the shopee partners page, after login
